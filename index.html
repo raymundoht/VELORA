@@ -17,7 +17,12 @@
   <meta property="og:description"
     content="Aromas que dejan huella. Equipos de alta tecnología con prueba gratuita de 2 días y mantenimiento incluido.">
   <meta property="og:image"
-    content="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80">
+    content="https://raymundoht.github.io/VELADORA/velora-hero.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://raymundoht.github.io/VELADORA/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://raymundoht.github.io/VELADORA/velora-hero.png">
 
   <!-- Google Fonts: Cinzel (Luxury Serif) & Plus Jakarta Sans (Modern Clean Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1079,12 +1084,12 @@
                       class="w-full px-4 py-3 rounded-xl bg-velora-obsidian border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-velora-champagne text-sm transition-colors">
                   </div>
 
-                  <!-- Empresa -->
+                  <!-- Empresa (opcional) -->
                   <div>
                     <label for="empresa"
                       class="block text-xs uppercase tracking-wider text-slate-300 font-medium mb-1.5">Empresa / Negocio
-                      *</label>
-                    <input type="text" id="empresa" name="Empresa" required placeholder="Ej. Hotel Altea / Boutique Lumi"
+                      <span class="text-velora-muted font-normal normal-case tracking-normal">(opcional)</span></label>
+                    <input type="text" id="empresa" name="Empresa" placeholder="Ej. Hotel Altea / Boutique Lumi"
                       class="w-full px-4 py-3 rounded-xl bg-velora-obsidian border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-velora-champagne text-sm transition-colors">
                   </div>
                 </div>
@@ -1099,24 +1104,17 @@
                       class="w-full px-4 py-3 rounded-xl bg-velora-obsidian border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-velora-champagne text-sm transition-colors">
                   </div>
 
-                  <!-- Tipo de negocio -->
-                  <div>
+                  <!-- Tipo de negocio (autocomplete) -->
+                  <div class="relative" id="tipoNegocioWrapper">
                     <label for="tipoNegocio"
                       class="block text-xs uppercase tracking-wider text-slate-300 font-medium mb-1.5">Tipo de Negocio
                       *</label>
-                    <select id="tipoNegocio" name="Tipo de Negocio" required
-                      class="w-full px-4 py-3 rounded-xl bg-velora-obsidian border border-white/15 text-white focus:outline-none focus:border-velora-champagne text-sm transition-colors">
-                      <option value="" disabled selected>Selecciona tu rubro</option>
-                      <option value="Hotel">Hotel / Hospitalidad</option>
-                      <option value="Restaurante">Restaurante / Bar</option>
-                      <option value="Oficina">Oficina Corporativa</option>
-                      <option value="Boutique">Boutique / Tienda Retail</option>
-                      <option value="Consultorio">Consultorio / Clínica</option>
-                      <option value="Gimnasio">Gimnasio / Wellness</option>
-                      <option value="SalonSpa">Salón de Belleza / Spa</option>
-                      <option value="AgenciaAutomotriz">Agencia Automotriz</option>
-                      <option value="Otro">Otro giro comercial</option>
-                    </select>
+                    <input type="text" id="tipoNegocio" name="Tipo de Negocio" required
+                      placeholder="Escribe o selecciona tu rubro" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="tipoNegocioList"
+                      class="w-full px-4 py-3 rounded-xl bg-velora-obsidian border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-velora-champagne text-sm transition-colors">
+                    <ul id="tipoNegocioList" role="listbox"
+                      class="absolute z-50 left-0 right-0 mt-1 max-h-52 overflow-y-auto rounded-xl bg-velora-obsidian border border-white/15 shadow-2xl shadow-black/40 hidden"
+                      style="scrollbar-width:thin; scrollbar-color: rgba(255,255,255,0.15) transparent;"></ul>
                   </div>
                 </div>
 
