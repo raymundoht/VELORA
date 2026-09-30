@@ -49,4 +49,89 @@ html{scroll-behavior:smooth}
 #successModal:not(.hidden)>div{animation:dialogIn .25s ease-out}
 @keyframes dialogIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:767px){#inicio .hero-product-image{transform-origin:65% 55%}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.reveal-ready{opacity:1;transform:none!important;transition:none!important}#inicio .hero-product-image{transform:none!important;transition:none!important}.button:hover{transform:none}.bento-card,a,button{transition:none!important}#successModal:not(.hidden)>div{animation:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.reveal-ready{opacity:1;transform:none!important;transition:none!important}#inicio .hero-product-image{transform:none!important;transition:none!important}.button:hover{transform:none}.bento-card,a,button{transition:none!important}#successModal:not(.hidden)>div{animation:none}.clients-marquee-track{animation:none!important}}
+
+/* ── Clients Marquee Carousel ─────────────────────────────────── */
+@keyframes marqueeScrollLeft{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+@keyframes marqueeScrollRight{
+  0%{transform:translateX(-50%)}
+  100%{transform:translateX(0)}
+}
+
+.clients-marquee-wrapper{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  padding-top:10px;
+}
+
+/* Fade edges */
+.clients-marquee-wrapper::before,
+.clients-marquee-wrapper::after{
+  content:'';
+  position:absolute;
+  top:0;bottom:0;
+  width:80px;
+  z-index:2;
+  pointer-events:none;
+}
+.clients-marquee-wrapper::before{
+  left:0;
+  background:linear-gradient(to right,#080808,transparent);
+}
+.clients-marquee-wrapper::after{
+  right:0;
+  background:linear-gradient(to left,#080808,transparent);
+}
+
+.clients-marquee{
+  overflow:hidden;
+  width:100%;
+  position:relative;
+}
+
+.clients-marquee-track{
+  display:flex;
+  align-items:center;
+  gap:0;
+  width:max-content;
+  animation:marqueeScrollLeft 35s linear infinite;
+}
+.clients-marquee--reverse .clients-marquee-track{
+  animation:marqueeScrollRight 40s linear infinite;
+}
+
+.marquee-item{
+  display:inline-block;
+  white-space:nowrap;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.04em;
+  color:#e5e5e5;
+  padding:8px 0;
+}
+.marquee-divider{
+  display:inline-block;
+  margin:0 20px;
+  font-size:18px;
+  color:#555;
+  user-select:none;
+}
+
+/* Pause on hover for accessibility */
+.clients-marquee:hover .clients-marquee-track{
+  animation-play-state:paused;
+}
+
+@media(max-width:767px){
+  .marquee-item{font-size:13px;letter-spacing:.02em}
+  .marquee-divider{margin:0 14px;font-size:15px}
+  .clients-marquee-wrapper::before,
+  .clients-marquee-wrapper::after{width:40px}
+}
+
