@@ -20,7 +20,7 @@ No requiere npm ni compilación. Para hospedarlo, sube el contenido de dist a la
 - dist/favicon.ico y favicon-*.png: iconos del navegador.
 - dist/apple-touch-icon.png: icono para dispositivos Apple.
 
-El hero usa una fotografía con efecto de profundidad; no es un modelo 3D. Las animaciones respetan la preferencia de movimiento reducido del sistema.
+El hero y la sección "La colección" usan una escena 3D (hero3d.js, Three.js por CDN): mármol negro con luz roja, recorrido de cámara guiado por scroll y fichas por equipo. Si el navegador no tiene WebGL se muestra la fotografía. Los modelos .glb hechos con IA se agregan en modelos/ (ver modelos/LEEME.md). Las animaciones respetan la preferencia de movimiento reducido del sistema.
 
 Requiere internet para Tailwind CSS, Google Fonts, Font Awesome e imágenes de Unsplash.
 

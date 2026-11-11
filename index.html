@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
@@ -248,13 +248,88 @@
         </div>
         <div class="hero-art" tabindex="0" role="group"
           aria-label="Imagen interactiva de equipos VELORA. Mueve el cursor, desliza horizontalmente o usa las flechas para inclinarla."
-          title="Mueve el cursor o desliza para explorar"><img class="hero-product-image" draggable="false"
-            src="./velora-hero.png" width="1691" height="930"
-            alt="Tres equipos de aromatización VELORA sobre una plataforma iluminada, difundiendo una fina bruma"
-            fetchpriority="high" decoding="async"></div>
+          title="Mueve el cursor o desliza para explorar"></div>
       </div>
       <div class="sector-row shell"><span>Una nueva atmósfera
           para</span><span>Hoteles</span><span>Restaurantes</span><span>Oficinas</span><span>Boutiques</span><span>Spas</span>
+      </div>
+
+      <!-- La colección: recorrido 3D guiado por scroll (hero3d.js) -->
+      <div id="coleccion" class="collection" aria-label="La colección de equipos VELORA">
+        <div class="collection-step collection-intro" data-scene="overview">
+          <div class="shell">
+            <span class="collection-eyebrow">La colección</span>
+            <h2 class="collection-title">Tres equipos.<br><em>Una misma esencia.</em></h2>
+            <p>Desliza para recorrer cada sistema de difusión en frío.</p>
+          </div>
+        </div>
+
+        <div class="collection-step" data-scene="chico" id="coleccion-chico">
+          <div class="shell">
+            <article class="collection-card">
+              <span class="collection-eyebrow">01 / 03 · Difusión en frío</span>
+              <h3 class="collection-name">Equipo <em>Chico</em></h3>
+              <span class="collection-badge">Hasta 300 m²</span>
+              <p>Ideal para consultorios médicos, oficinas privadas, boutiques selectas y áreas de recepción compactas.</p>
+              <ul>
+                <li>Micro-nebulización silenciosa</li>
+                <li>Programación digital inteligente</li>
+                <li>Insumo y mantenimiento 100% incluido</li>
+              </ul>
+              <a class="button primary" target="_blank" rel="noopener noreferrer"
+                href="https://wa.me/526145989483?text=Hola%2C%20me%20interesa%20informaci%C3%B3n%20sobre%20el%20Equipo%20Chico%20de%20300m2.">Solicitar
+                este equipo <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </article>
+          </div>
+        </div>
+
+        <div class="collection-step" data-scene="mediano" id="coleccion-mediano">
+          <div class="shell">
+            <article class="collection-card">
+              <span class="collection-eyebrow">02 / 03 · Más solicitado</span>
+              <h3 class="collection-name">Equipo <em>Mediano</em></h3>
+              <span class="collection-badge">Hasta 500 m²</span>
+              <p>Ideal para restaurantes, recepciones corporativas, salas de venta, spas y pisos de oficinas completos.</p>
+              <ul>
+                <li>Dispersión homogénea constante</li>
+                <li>Ciclos programables por hora y día</li>
+                <li>Recargas y calibración mensual incluida</li>
+              </ul>
+              <a class="button primary" target="_blank" rel="noopener noreferrer"
+                href="https://wa.me/526145989483?text=Hola%2C%20me%20interesa%20informaci%C3%B3n%20sobre%20el%20Equipo%20Mediano%20de%20500m2.">Solicitar
+                este equipo <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </article>
+          </div>
+        </div>
+
+        <div class="collection-step" data-scene="grande" id="coleccion-grande">
+          <div class="shell">
+            <article class="collection-card">
+              <span class="collection-eyebrow">03 / 03 · Grandes superficies</span>
+              <h3 class="collection-name">Equipo <em>Grande</em></h3>
+              <span class="collection-badge">Hasta 2000 m²</span>
+              <p>Ideal para hoteles, gimnasios, agencias automotrices, salones de eventos y grandes superficies comerciales.</p>
+              <ul>
+                <li>Conexión a ductos de clima o difusión directa</li>
+                <li>Máxima cobertura con flujo ultra-fino</li>
+                <li>Soporte prioritario y reposición express</li>
+              </ul>
+              <a class="button primary" target="_blank" rel="noopener noreferrer"
+                href="https://wa.me/526145989483?text=Hola%2C%20me%20interesa%20informaci%C3%B3n%20sobre%20el%20Equipo%20Grande%20de%202000m2.">Solicitar
+                este equipo <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </article>
+          </div>
+        </div>
+
+        <div class="collection-step collection-outro" data-scene="outro">
+          <div class="shell">
+            <h2 class="collection-title">¿No sabes cuál <em>elegir?</em></h2>
+            <p>Te asesoramos según los metros, la ventilación y el tipo de negocio.</p>
+            <div class="hero-actions"><a class="button primary" href="#prueba-gratis">Prueba 2 días gratis <i
+                  class="fas fa-arrow-right" aria-hidden="true"></i></a><a class="button secondary"
+                href="#equipos">Comparar equipos</a></div>
+          </div>
+        </div>
       </div>
     </section>
     <!-- Presentación de VELORA -->
@@ -1817,6 +1892,10 @@
   </div>
 
   <script src="./interaction.js"></script>
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+  </script>
+  <script type="module" src="./hero3d.js"></script>
 </body>
 
 </html>

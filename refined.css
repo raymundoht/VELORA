@@ -135,3 +135,199 @@ html{scroll-behavior:smooth}
   .clients-marquee-wrapper::after{width:40px}
 }
 
+/* ── Escena 3D cinematográfica (hero3d.js) ─────────────────────────
+   Un canvas fijo detrás del hero y de "La colección". La foto del hero
+   queda como respaldo si WebGL no está disponible. */
+.scene-3d{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 55%,#1a0509 0%,#0b0506 45%,#060606 80%)}
+.scene-3d canvas{display:block;width:100%;height:100%;opacity:0;transition:opacity 1.4s ease}
+.scene-3d.is-ready canvas{opacity:1}
+:where(main>section:not(#inicio)){background-color:#080808}
+body>main{position:relative;z-index:1}
+#inicio.editorial-hero{background:transparent!important}
+#inicio .hero-art.has-3d{cursor:grab;touch-action:pan-y}
+#inicio .hero-art.has-3d:active{cursor:grabbing}
+#inicio .hero-art.has-3d .hero-product-image{opacity:0;transition:opacity .9s ease}
+.hero-3d-tip{position:absolute;left:0;top:0;pointer-events:none;display:flex;flex-direction:column;gap:2px;
+  padding:9px 13px;border-radius:8px;background:rgba(14,8,9,.85);border:1px solid #4a2028;
+  backdrop-filter:blur(8px);white-space:nowrap;opacity:0;transition:opacity .2s;font-size:12px;color:#f2f2f2}
+.hero-3d-tip span{font-size:10px;color:#c9a0a7;letter-spacing:.04em}
+.hero-3d-tip.is-visible{opacity:1}
+.hero-art:not(.has-3d) .hero-3d-hint{display:none}
+.hero-3d-hint{position:absolute;right:28px;top:26px;display:flex;align-items:center;gap:9px;white-space:nowrap;
+  padding:8px 13px;border-radius:20px;border:1px solid #3a2226;background:rgba(8,6,6,.55);
+  font-size:10px;letter-spacing:.06em;color:#c8bfc0;pointer-events:none;transition:opacity .4s}
+.hero-3d-hint.is-hidden{opacity:0}
+
+/* Titular editorial */
+#inicio .hero-copy h1,.collection-title,.collection-name{font-family:'Cormorant Garamond',Georgia,serif!important;
+  font-weight:400!important;letter-spacing:-.02em!important}
+#inicio .hero-copy h1{font-size:clamp(64px,7.2vw,106px);line-height:.92!important}
+#inicio .hero-copy h1 span{font-style:italic;color:#d9b9be}
+
+/* La colección: cada paso ocupa una pantalla; la ficha entra por la derecha */
+.collection{position:relative}
+.collection-step{min-height:100vh;display:flex;align-items:center}
+.collection-step>.shell{width:100%}
+.collection-intro,.collection-outro{align-items:flex-start;padding-top:15vh;text-align:center}
+.collection-intro p,.collection-outro p{color:#a99fa1;font-size:14px;margin-top:14px}
+.collection-outro .hero-actions{justify-content:center;margin-top:24px}
+.collection-eyebrow{display:block;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#d98a96;margin-bottom:18px}
+.collection-title{font-size:clamp(46px,6.4vw,92px)!important;line-height:.95!important;color:#f4efef}
+.collection-title em,.collection-name em{font-style:italic;color:#d9b9be}
+.collection-card{margin-left:auto;max-width:410px;padding:38px 36px;border-radius:14px;
+  background:linear-gradient(160deg,rgba(24,12,14,.72),rgba(8,8,8,.6));border:1px solid #33222a;backdrop-filter:blur(14px)}
+.collection-name{font-size:clamp(46px,4.6vw,64px)!important;line-height:.95!important;color:#f4efef;margin:0 0 18px}
+.collection-badge{display:inline-block;font-size:11px;padding:5px 11px;border-radius:20px;border:1px solid #5a2e37;color:#e7c9ce;margin-bottom:20px}
+.collection-card p{font-size:14px;color:#b3abac;margin-bottom:18px}
+.collection-card ul{display:grid;gap:9px;margin-bottom:28px;font-size:13px;color:#d6d0d1}
+.collection-card li{display:flex;gap:10px;align-items:center}
+.collection-card li::before{content:'';width:14px;height:1px;background:#d98a96;flex-shrink:0}
+.collection-card>*{opacity:0;transform:translateX(48px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.collection-step.is-active .collection-card>*{opacity:1;transform:none}
+.collection-card>:nth-child(2){transition-delay:.06s}.collection-card>:nth-child(3){transition-delay:.12s}
+.collection-card>:nth-child(4){transition-delay:.18s}.collection-card>:nth-child(5){transition-delay:.24s}
+.collection-card>:nth-child(6){transition-delay:.3s}
+.collection-intro .shell>*,.collection-outro .shell>*{opacity:0;transform:translateY(28px);
+  transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.collection-step.is-active .shell>*{opacity:1;transform:none}
+.collection-intro .shell>:nth-child(2),.collection-outro .shell>:nth-child(2){transition-delay:.1s}
+.collection-intro .shell>:nth-child(3),.collection-outro .shell>:nth-child(3){transition-delay:.2s}
+/* Sin WebGL: la colección se lee como una lista normal */
+.collection:not(.has-3d) .collection-step{min-height:0;padding:60px 0}
+.collection:not(.has-3d) .collection-step *{opacity:1!important;transform:none!important}
+.collection:not(.has-3d) .collection-card{margin-inline:auto}
+
+@media(max-width:767px){
+  .hero-3d-hint{right:50%;top:12px;bottom:auto;transform:translateX(50%)}
+  #inicio .hero-copy h1{font-size:clamp(54px,15vw,72px)}
+  .collection-step{align-items:flex-end;padding-bottom:5vh}
+  .collection-intro,.collection-outro{align-items:flex-start;padding-top:12vh;padding-bottom:0}
+  .collection-card{max-width:none;padding:26px 22px}
+  .collection-card>*{transform:translateY(30px)}
+  .collection-card ul{margin-bottom:20px}
+  .collection-name{font-size:46px!important;margin-bottom:12px}
+}
+@media(prefers-reduced-motion:reduce){.scene-3d canvas,#inicio .hero-art.has-3d .hero-product-image,
+  .collection-step *{transition:none!important}}
+
+/* ── Sistema editorial (todas las secciones) ───────────────────────
+   Mismo lenguaje que el hero y "La colección": titulares serif con la
+   palabra clave en cursiva rosada, etiquetas espaciadas, tarjetas con
+   degradado burdeos y entradas suaves al hacer scroll. */
+:root{--rose:#d98a96;--rose-soft:#d9b9be;--line:#2c1f23;--card-a:rgba(26,13,16,.78);--card-b:rgba(11,10,10,.92);
+  --ease-out:cubic-bezier(.16,1,.3,1)}
+main>section:not(#inicio){background-image:radial-gradient(ellipse 55% 38% at 50% 0%,rgba(196,18,47,.10),transparent 72%);
+  border-top-color:rgba(255,255,255,.05)!important}
+main>section:nth-child(2n+1):not(#inicio){background-color:#0a0808!important}
+
+/* Titulares */
+main>section:not(#inicio) h2{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:400!important;
+  font-size:clamp(40px,5.2vw,70px)!important;line-height:1!important;letter-spacing:-.015em!important;color:#f4efef!important}
+main>section:not(#inicio) h2 span,main>section:not(#inicio) h2 .gold-gradient-text{font-style:italic;color:var(--rose-soft)!important;
+  -webkit-text-fill-color:var(--rose-soft)!important}
+main>section:not(#inicio) h3.font-serif{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:500!important;
+  letter-spacing:-.005em!important;font-size:clamp(22px,1.9vw,27px)!important;line-height:1.1!important}
+#equipos .bento-card h3.font-serif{font-size:clamp(32px,3vw,40px)!important}
+.footer-wordmark{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:400!important;font-style:italic;
+  letter-spacing:-.03em!important;color:#2a1c1f!important}
+
+/* Etiquetas y acentos */
+main>section:not(#inicio) span.uppercase[class*="tracking-[0."],main>section:not(#inicio) span.uppercase.tracking-widest{
+  color:var(--rose)!important;font-size:10px!important;letter-spacing:.3em!important;font-weight:500!important}
+main>section:not(#inicio) .text-velora-champagne{color:var(--rose)!important}
+main>section:not(#inicio) i.fas,main>section:not(#inicio) i.fab{color:var(--rose)}
+.equipment-symbol{border-bottom-color:var(--line)!important;color:#b9a9ac!important}
+.equipment-symbol i{color:var(--rose)!important}
+
+/* Tarjetas */
+.bento-card{background:linear-gradient(160deg,var(--card-a),var(--card-b))!important;border:1px solid var(--line)!important;
+  border-radius:16px!important}
+.bento-card:hover{border-color:#5a2e37!important;box-shadow:0 24px 60px -30px rgba(196,18,47,.45)!important}
+main>section:not(#inicio) [class*="bg-white/5"]{background-color:rgba(255,255,255,.035)!important}
+main>section:not(#inicio) [class*="border-white/10"]{border-color:var(--line)!important}
+
+/* Tarjeta destacada de Equipos: burdeos en lugar de blanco */
+#equipos .grid>.bento-card:nth-child(2){background:linear-gradient(165deg,#3a0f18 0%,#1a0a0d 55%,#0d0909 100%)!important;
+  border-color:#7a2f3c!important;color:#f4efef!important;box-shadow:0 30px 80px -40px rgba(196,18,47,.7)!important}
+#equipos .grid>.bento-card:nth-child(2) .text-white,#equipos .grid>.bento-card:nth-child(2) .text-slate-200{color:#f4efef!important}
+#equipos .grid>.bento-card:nth-child(2) .text-velora-champagne{color:var(--rose)!important}
+#equipos .grid>.bento-card:nth-child(2) .text-velora-muted{color:#bba9ac!important}
+#equipos .grid>.bento-card:nth-child(2) .equipment-symbol{color:#d6c4c7!important}
+#equipos .grid>.bento-card:nth-child(2) a{background:#f1ecec!important;color:#140c0e!important}
+#equipos .grid>.bento-card:nth-child(2)>.absolute{background:linear-gradient(90deg,#c4122f,#8e0f25)!important;color:#fff!important;
+  border:0}
+
+/* Botones y formulario */
+.button.secondary,main a[class*="border-white/20"]{border-color:#3a2a2e!important}
+.button.secondary:hover,main a[class*="border-white/20"]:hover{border-color:var(--rose)!important;background:rgba(217,138,150,.08)!important}
+#prueba-gratis input,#prueba-gratis select{background:rgba(10,8,8,.8)!important;border-color:#33262a!important}
+#prueba-gratis input:focus,#prueba-gratis select:focus{border-color:var(--rose)!important;box-shadow:0 0 0 3px rgba(217,138,150,.15)!important}
+main>section:not(#inicio) img{filter:grayscale(1) contrast(1.08) brightness(.72)!important;transition:filter .8s var(--ease-out),transform 1.2s var(--ease-out)!important}
+main>section:not(#inicio) .group:hover img{filter:grayscale(.6) contrast(1.08) brightness(.82)!important;transform:scale(1.04)}
+
+/* Entradas al hacer scroll: bloque + tarjetas escalonadas */
+.reveal-ready{transform:translateY(36px)!important;transition:opacity 1s var(--ease-out),transform 1s var(--ease-out)!important}
+.reveal-ready.is-visible{transform:none!important}
+.reveal-ready .grid>*{opacity:0;translate:0 26px;
+  transition:opacity .9s var(--ease-out),translate .9s var(--ease-out),border-color .35s,box-shadow .35s!important}
+.reveal-ready.is-visible .grid>*{opacity:1;translate:0 0}
+.reveal-ready .grid>:nth-child(2){transition-delay:.08s!important}.reveal-ready .grid>:nth-child(3){transition-delay:.16s!important}
+.reveal-ready .grid>:nth-child(4){transition-delay:.24s!important}.reveal-ready .grid>:nth-child(5){transition-delay:.32s!important}
+.reveal-ready .grid>:nth-child(6){transition-delay:.4s!important}.reveal-ready .grid>:nth-child(n+7){transition-delay:.48s!important}
+
+/* Grano de película sobre la escena 3D */
+.scene-3d::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+main>section:not(#inicio) .font-serif:not(h2):not(h3){font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:500!important;
+  font-size:clamp(30px,2.6vw,38px)!important;line-height:1.05!important;letter-spacing:-.01em!important}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+.collection-step{min-height:100vh;min-height:100svh}
+/* Tablet: texto del hero más angosto y fichas más compactas */
+@media(min-width:768px) and (max-width:1023px){
+  #inicio .hero-copy{width:52%}
+  #inicio .hero-copy h1{font-size:clamp(56px,7.4vw,72px)}
+  .collection-card{max-width:340px;padding:30px 28px}
+  .collection-name{font-size:48px!important}
+}
+/* Teléfono */
+@media(max-width:767px){
+  #inicio .hero-art{aspect-ratio:.92}
+  #inicio .hero-copy{padding-top:36px}
+  .collection-card{border-radius:18px;background:linear-gradient(170deg,rgba(24,12,14,.86),rgba(8,8,8,.9))}
+  .collection-card p{font-size:13px;margin-bottom:14px}
+  .collection-card ul{gap:7px;font-size:12.5px}
+  .collection-card .button{width:100%}
+  .collection-title{font-size:clamp(42px,12vw,56px)!important}
+  .collection-intro p,.collection-outro p{padding-inline:12px}
+  .collection-outro .hero-actions .button{flex:1 1 140px}
+  main>section:not(#inicio) h2{font-size:clamp(36px,10.5vw,46px)!important}
+  #equipos .grid>.bento-card:nth-child(2){margin-top:12px}
+  .hero-3d-tip{display:none}
+}
+@media(max-width:380px){
+  .shell{padding-inline:18px}
+  #inicio .hero-copy h1{font-size:50px}
+  .collection-card{padding:22px 18px}
+  .collection-name{font-size:40px!important}
+}
+/* Teléfono en horizontal / pantallas bajas */
+@media(max-height:560px) and (orientation:landscape){
+  .collection-step{min-height:100vh;padding-block:70px 16px;align-items:center}
+  .collection-intro,.collection-outro{padding-top:80px}
+  .collection-card{max-width:360px;padding:20px 22px;margin-left:auto}
+  .collection-card ul{display:none}
+  .collection-card p{display:none}
+  .collection-card .button{display:flex;width:fit-content}
+  .collection-badge{display:table}
+  .collection-intro,.collection-outro{text-align:left}
+  .collection-intro .shell>*,.collection-outro .shell>*{max-width:46%}
+  .collection-outro .hero-actions{justify-content:flex-start}
+  .collection-card p{font-size:12.5px;margin-bottom:12px}
+  .collection-name{font-size:38px!important;margin-bottom:10px}
+  .collection-badge{margin-bottom:12px}
+  .collection-eyebrow{margin-bottom:10px}
+  .collection-title{font-size:44px!important}
+}
